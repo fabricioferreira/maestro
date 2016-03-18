@@ -1,38 +1,36 @@
+var maestro = require('../maestro');
 
-var maestro = require('../maestro.js');
-
-maestro.push('http-listen', {
+maestro.carry('http-listen', {
 	port: 8889
-})
+});
 
-maestro.push('save-message', {
+maestro.carry('save-message', {
 	output: 'sqlite'
-})
+});
 
-maestro.push('http-response', {
+maestro.carry('http-response', {
 	status: 200,
 	text: 'Ok'
-})
+});
 
-maestro.push('enqueue', {})
+maestro.carry('enqueue', {})
 
-maestro.push('external', {
+maestro.carry('external', {
 	service: 'http://tool/resources/save',
-	min: 1000, 
+	min: 1000,
 	max: 3000
-})
+});
 
-maestro.push('dequeue', {})
+maestro.carry('dequeue', {});
 
-maestro.push('debug', {
+maestro.carry('debug', {
 	logFunction: function(msg) {
 		return 'finished in ' + (Date.now() - msg._details.start);
 	}
-})
+});
 
 maestro.report({
 	port: 8888
-})
+});
 
-maestro.start()
-
+maestro.start();
